@@ -1,0 +1,37 @@
+﻿
+
+Katmanlı bir proje oluşturacağız.
+
+* Entitylerin/sınıflarımızın bulunacağı bir MODEL katmanı ,
+* Modeller ile veritabanını haberleştireceğimiz/repolarımızı kullanarak veriye erişim sağlayacağımız bir DATA ACCESS katmanı,
+* Servis metotlarımızı oluşturacağımız/repolara belli kural ve kontroller dahilinde iş yaptıracağımız BUSSINESS katmanı,
+* Api servislerini yazacağımız bir APİ katmanı yapacağız.
+
+
+
+MODEL katmanımız için => Class Library (sınıf kütüphanesi) olarak proje açtık.
+
+DATA ACCESS katmanımız => Class Library olarak proje açıp
+					      Context ve Repositories klasörlerinde yapılarımızı oluşturacağız.
+						  NOT : burada ilgili sınıfları aynı proje altında göremeyeceğimiz için entitylerin olduğu katmana tanıtmamız gerekli. Referans vermemiz gerekli.
+**** REFERANS VERMEK için => ilgili katmana sağ tık - add - project reference ve çıkan projelerden seçim yapılabilir  yada
+							 Entitynin adının algılanmadığı yerde CTRL+. kombinasyonuyla tavsiyedeki ADD REFERENCE kanul edilir.
+							 YANLIŞ REFERENCE eklendiğinde , eklenen proje altındaki dependecies => projeye ulaşılarak yanlış seçilen proje silinebilir.
+
+Context oluştururken Mic.EfCore.SQLServer paketi , göç için Mic.EfCore.Tools paketi istenir.
+
+
+
+
+BUssines katmanımız için => Class Library porjesi oluşturduk
+                            Repolar kurallı şekilde iş yaptırılırken bu metodların daha önce soyut(interface) ve sonra implemente edilmiş somut sınıfları oluşturuacağız
+							EmlployeService İçine IEmployeeRepo çağıracağız ama aslında işi yaptırmak için
+							EmpolyeeRepo çağırmış olacağız bu yüzden muhakkak startup içine register (kayıt) yapmalıyız.
+
+Api Katmanı İçibn   =>   APi Projesi açacağız
+                         Henüz göç tamamlanmadığı için öncelikli olarak app.Setting.jsona connectionsStrgimizi oluşutruduk ve startUP
+						 AppDbContexti Eklemesini yaptık. Connection String ve Context sınıfı ayrı katmanlarda olacağı için
+						 Mic.EfCore.Desing Pakedi projeye indirmeliyiz
+
+Çok ÖNEMLİ NOT : GÖÇ Esnasında solitonda seçili proje : Startup klasörünün olduğu proje,
+                package manage consoel dai dafault proje : context sınıfını barından proje olmalı
